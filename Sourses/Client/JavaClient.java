@@ -6,25 +6,23 @@ public class JavaClient {
         try {
             XmlRpcClient server = new XmlRpcClient("http://localhost:8080");
             Vector<Integer> params = new Vector<>();
-            int a = 2, b = 3;
+            int celsius = 0;
 
-            // Check if arguments are provided
-            if (args.length >= 2) {
+            // Перевірка, чи передані аргументи
+            if (args.length >= 1) {
                 try {
-                    a = Integer.parseInt(args[0]);
-                    b = Integer.parseInt(args[1]);
+                    celsius = Integer.parseInt(args[0]);
                 } catch (NumberFormatException e) {
-                    System.out.println("Error: Invalid number format. Using default values (a=2, b=3).");
+                    System.out.println("Помилка: Невірний формат числа. Використовується значення за замовчуванням (0°C).");
                 }
             } else {
-                System.out.println("No arguments provided. Using default values (a=2, b=3).");
+                System.out.println("Аргументи не передані. Використовується значення за замовчуванням (0°C).");
             }
 
-            params.addElement(a);
-            params.addElement(b);
-            Object result = server.execute("sample.sum", params);
-            int sum = ((Integer) result).intValue();
-            System.out.println("The sum is: " + sum);
+            params.addElement(celsius);
+            Object result = server.execute("sample.fahrenheits", params);
+            int fahrenheits = ((Integer) result).intValue();
+            System.out.println("Температура у Фаренгейтах: " + fahrenheits);
         } catch (Exception exception) {
             System.err.println("JavaClient: " + exception);
         }

@@ -1,8 +1,8 @@
 import org.apache.xmlrpc.*;
 public class JavaWebService
 {
-    public int sum(int x, int y) {
-        return x+y;
+    public int fahrenheits(int celsius) {
+        return (celsius * 9 / 5) + 32;
     }
     public static void main (String [] args) {
         try {
